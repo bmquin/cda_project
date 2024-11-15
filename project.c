@@ -1,5 +1,5 @@
 #include "spimcore.h"
-// Damon Bullock & Benjamin Quientero
+// Damon Bullock & Benjamin Quintero
 // CDA Final Project
 // 11/15/2024
 // MySPIM - A MIPS Processor Simulator
