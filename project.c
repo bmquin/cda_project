@@ -6,9 +6,73 @@
 
 /* ALU */
 /* 10 Points */
+/* Written by Damon Bullock */
 void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
 {
+    switch(ALUControl) 
+    {
+      case 000: 
+      // Z = A + B
+      *ALUResult = A + B;
+      break;
 
+      case 001:
+      // Z = A - B
+      *ALUResult = A - B;
+      break;
+
+      case 010:
+      // if A < B, Z = 1; otherwise, Z = 0
+      if ((signed) A < (signed) B)
+      {
+        *ALUResult = -1;
+      }
+
+        else 
+      {
+        *ALUResult = 1;
+      }
+      break;
+
+      case 011:
+      // if A < B, Z = 1; otherwise, Z = 0 (A and B are unsigned integers)
+      if (A < B)
+      {
+        *ALUResult = 1;
+      }
+      else
+      {
+        *ALUResult = 0;
+      }
+
+      case 100:
+      // Z = A AND B
+      *ALUResult = A & B;
+      break;
+      
+      case 101:
+      // Z = A OR B
+      *ALUResult = A | B;
+      break;
+      
+      case 110:
+      // Z = Shift B left by 16 bits
+      B << 16;
+      break;
+      
+      case 111:
+      //Z = NOT A
+      *ALUResult = ~A;
+      break;
+      }
+  if (*ALUResult == 0)
+  {
+    *Zero == 1;
+  }
+  else
+  {
+    *Zero == 0;
+  }
 }
 
 /* instruction fetch */
