@@ -27,8 +27,8 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
       {
         *ALUResult = -1;
       }
-
-        else 
+      
+      else 
       {
         *ALUResult = 1;
       }
@@ -40,6 +40,7 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
       {
         *ALUResult = 1;
       }
+      
       else
       {
         *ALUResult = 0;
@@ -64,11 +65,13 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
       //Z = NOT A
       *ALUResult = ~A;
       break;
-      }
+    }
+    
   if (*ALUResult == 0)
   {
     *Zero == 1;
   }
+  
   else
   {
     *Zero == 0;
@@ -77,9 +80,20 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
 
 /* instruction fetch */
 /* 10 Points */
+/* Written by Damon Bullock */
 int instruction_fetch(unsigned PC,unsigned *Mem,unsigned *instruction)
 {
-
+    // checks for word alignment 
+    if (PC % 4 == 0)
+    {
+        *instruction = Mem[PC >> 2];
+        return 0;
+    }
+    // Halt condition if no word alignment
+    else
+    {
+        return 1;
+    }
 }
 
 
