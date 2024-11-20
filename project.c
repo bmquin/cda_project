@@ -58,7 +58,7 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
       
       case 110:
       // Z = Shift B left by 16 bits
-      B << 16;
+      B =<< 16;
       break;
       
       case 111:
@@ -108,8 +108,6 @@ void instruction_partition(unsigned instruction, unsigned *op, unsigned *r1,unsi
     *r2 = (instruction >> 16) & 0x1f;
 
     *r3 = (instruction >> 11) & 0x1f;
-
-    *shamt = (instruction >> 6) & 0x1f;
 
     *funct = instruction & 0x3f;
 
