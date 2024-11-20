@@ -101,7 +101,21 @@ int instruction_fetch(unsigned PC,unsigned *Mem,unsigned *instruction)
 /* 10 Points */
 void instruction_partition(unsigned instruction, unsigned *op, unsigned *r1,unsigned *r2, unsigned *r3, unsigned *funct, unsigned *offset, unsigned *jsec)
 {
+    *op = (instruction >> 26) & 0x3f;
+    
+    *r1 = (instruction >> 21) & 0x1f;
+    
+    *r2 = (instruction >> 16) & 0x1f;
 
+    *r3 = (instruction >> 11) & 0x1f;
+
+    *shamt = (instruction >> 6) & 0x1f;
+
+    *funct = instruction & 0x3f;
+
+    *offset = instruction & 0xffff;
+
+    *jsec = instruction & 0x3ffffff;
 }
 
 
@@ -110,7 +124,17 @@ void instruction_partition(unsigned instruction, unsigned *op, unsigned *r1,unsi
 /* 15 Points */
 int instruction_decode(unsigned op,struct_controls *controls)
 {
+    controls->RegDst = 0;
+    controls->Jump = 0;
+    controls->Branch = 0;
+    controls->MemRead = 0;
+    controls->MemToReg = 0;
+    controls->ALUOp = 0;
+    controls->MemWrite = 0;
+    controls->ALUSrc = 0;
+    controls->RegWrite = 0;
 
+    
 }
 
 /* Read Register */
