@@ -137,17 +137,25 @@ int instruction_decode(unsigned op,struct_controls *controls)
 
 /* Read Register */
 /* 5 Points */
+/* Written by Damon Bullock */
 void read_register(unsigned r1,unsigned r2,unsigned *Reg,unsigned *data1,unsigned *data2)
 {
-
+    // Writes the registers r1 and r2 (Addressed by Reg into data1 and data2)
+    *data1 = Reg[r1];
+    *data2 = Reg[r2];
 }
 
 
 /* Sign Extend */
 /* 10 Points */
+/* Written by Damon Bullock */
 void sign_extend(unsigned offset,unsigned *extended_value)
 {
-
+    // checks if sgn but is 1
+    if ((offset >> 15) == 1)
+        *extended_value = offset | 0xffff0000;
+    else
+        *extended_value = offset | 0x0000ffff;
 }
 
 /* ALU operations */
