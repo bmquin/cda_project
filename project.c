@@ -264,17 +264,54 @@ int ALU_operations(unsigned data1,unsigned data2,unsigned extended_value,unsigne
 
 /* Read / Write Memory */
 /* 10 Points */
+/* Written by Benjamin Quintero */
 int rw_memory(unsigned ALUresult,unsigned data2,char MemWrite,char MemRead,unsigned *memdata,unsigned *Mem)
 {
+    if(MemRead == 1) {
+        if(ALUresult % 4 == 0) {
+            *memdata = Mem[ALUresult >> 2];
+        }
+        else {
+            return 1;
+        }
+    }
+
+    if(MemWrite == 1) {
+        if(ALUresult % 4 == 0) {
+            Mem[ALUresult >> 2] = data2;
+        }
+        else {
+            return 1;
+        }
+    }
+
+    return 0;
 
 }
 
-
 /* Write Register */
 /* 10 Points */
+/* Written by Benjamin Quintero */
 void write_register(unsigned r2,unsigned r3,unsigned memdata,unsigned ALUresult,char RegWrite,char RegDst,char MemtoReg,unsigned *Reg)
 {
-
+    if(RegWrite == 1) {
+        if(MemtoReg == 1) {
+            if(RegDst == 0) {
+                Reg[r2] = memdata;
+            }
+            else if(RegDst == 1) {
+                Reg[r3] = memdata;
+            }
+        }
+        else if(MemtoReg == 0) {
+            if(RegDst == 0) {
+                Reg[r2] = ALUresult;
+            }
+            else if(RegDst == 1) {
+                Reg[r3] = ALUresult;
+            }
+        }
+    }
 }
 
 /* PC update */
