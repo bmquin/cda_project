@@ -103,25 +103,27 @@ int instruction_fetch(unsigned PC,unsigned *Mem,unsigned *instruction)
 void instruction_partition(unsigned instruction, unsigned *op, unsigned *r1,unsigned *r2, unsigned *r3, unsigned *funct, unsigned *offset, unsigned *jsec)
 {
     *op = (instruction >> 26) & 0x3f;
+    
     if(*op == 0) { // R Type
+        *r1 = (instruction >> 21) & 0x1f;
 
-    } else if(*op == 2 || *op == 3) { // J Type
+        *r2 = (instruction >> 16) & 0x1f;
 
-    } else { // I Type
+        *r3 = (instruction >> 11) & 0x1f;
 
+        *funct = instruction & 0x1f;
+    } 
+    else if(*op == 2 || *op == 3) 
+    { // J Type
+        *jsec = instruction & 0x3FFFFFf;
+    } 
+    else { // I Type
+        *r1 = (instruction >> 21) & 0x1f;
+
+        *r2 = (instruction >> 16) & 0x1f;
+        
+        *offset = instruction & 0xffff;
     }
-
-    *r1 = (instruction >> 21) & 0x1f;
-
-    *r2 = (instruction >> 16) & 0x1f;
-
-    *r3 = (instruction >> 11) & 0x1f;
-
-    *funct = instruction & 0x1f;
-
-    *offset = instruction & 0xffff;
-
-    *jsec = instruction & 0x3FFFFFf;
 }
 
 
