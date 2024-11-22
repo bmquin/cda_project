@@ -13,24 +13,24 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
     {
       case 0: 
       // Z = A + B
-      *ALUResult = A + B;
+      *ALUresult = A + B;
       break;
 
       case 1:
       // Z = A - B
-      *ALUResult = A - B;
+      *ALUresult = A - B;
       break;
 
       case 2:
       // if A < B, Z = 1; otherwise, Z = 0
       if ((signed) A < (signed) B)
       {
-        *ALUResult = -1;
+        *ALUresult = -1;
       }
       
       else 
       {
-        *ALUResult = 1;
+        *ALUresult = 1;
       }
       break;
 
@@ -38,22 +38,22 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
       // if A < B, Z = 1; otherwise, Z = 0 (A and B are unsigned integers)
       if (A < B)
       {
-        *ALUResult = 1;
+        *ALUresult = 1;
       }
       
       else
       {
-        *ALUResult = 0;
+        *ALUresult = 0;
       }
 
       case 4:
       // Z = A AND B
-      *ALUResult = A & B;
+      *ALUresult = A & B;
       break;
       
       case 5:
       // Z = A OR B
-      *ALUResult = A | B;
+      *ALUresult = A | B;
       break;
       
       case 6:
@@ -63,11 +63,11 @@ void ALU(unsigned A,unsigned B,char ALUControl,unsigned *ALUresult,char *Zero)
       
       case 7:
       //Z = NOT A
-      *ALUResult = ~A;
+      *ALUresult = ~A;
       break;
     }
     
-  if (*ALUResult == 0)
+  if (*ALUresult == 0)
   {
     *Zero == 1;
   }
