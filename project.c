@@ -112,17 +112,38 @@ void instruction_partition(unsigned instruction, unsigned *op, unsigned *r1,unsi
         *r3 = (instruction >> 11) & 0x1f;
 
         *funct = instruction & 0x1f;
+
+        *offset = 0;
+        
+        *jsec = 0;
     } 
     else if(*op == 2 || *op == 3) 
     { // J Type
+        *r1 = 0;
+
+        *r2 = 0;
+
+        *r3 = 0;
+
+        *funct = 0;
+
+        *offset = 0;
+        
         *jsec = instruction & 0x3FFFFFf;
     } 
     else { // I Type
+        
         *r1 = (instruction >> 21) & 0x1f;
 
         *r2 = (instruction >> 16) & 0x1f;
+
+        *r3 = 0;
+
+        *funct = 0;
         
         *offset = instruction & 0xffff;
+
+        *jsec = 0;
     }
 }
 
